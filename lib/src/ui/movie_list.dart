@@ -2,11 +2,28 @@ import 'package:flutter/material.dart';
 import '../models/item_model.dart';
 import '../blocs/movies_bloc.dart';
 
-class MovieList extends StatelessWidget {
+class MovieList extends StatefulWidget {
+  @override
+  _MovieListState createState() => _MovieListState();
+}
+
+class _MovieListState extends State<MovieList> {
+  // initState method in a StatefulWidget is called first to allocate resources
+  @override
+  void initState() {
+    super.initState();
+    bloc.fetchAllMovies();
+  }
+
+  // dispose method is called while disposing of those allocated resources
+  @override
+  void dispose() {
+    bloc.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    bloc.fetchAllMovies();
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Popular Movies'),
